@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include "window.h"
+#include "glimbo/window.h"
 
 namespace glimbo {
     struct Engine {
@@ -16,4 +16,4 @@ namespace glimbo {
         uint64_t last_frame = 0;
         Window window;
     };
-}
+} // namespace glimbo

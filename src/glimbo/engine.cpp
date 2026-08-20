@@ -2,10 +2,9 @@
 
 #include <SDL3/SDL.h>
 
-
 using namespace glimbo;
 
-Engine::Engine() : window(1000, 800, "Glimbo Game Engine") { }
+Engine::Engine() : window(1000, 800, "Glimbo Game Engine") {}
 
 void Engine::update() {
     const uint64_t now = SDL_GetPerformanceCounter();

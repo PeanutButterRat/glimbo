@@ -1,10 +1,9 @@
 #include "window.h"
 
-#include <SDL3/SDL.h>
-#include <glad/glad.h>
-
 #include <stdexcept>
 
+#include <SDL3/SDL.h>
+#include <glad/glad.h>
 
 using namespace glimbo;
 
@@ -37,5 +36,7 @@ Window::Window(const int width, const int height, const std::string &title) : wi
 }
 
 Window::~Window() {
-    if (sdl_window) { SDL_DestroyWindow(sdl_window); };
+    if (sdl_window) {
+        SDL_DestroyWindow(sdl_window);
+    };
 }

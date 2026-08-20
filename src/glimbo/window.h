@@ -2,7 +2,6 @@
 
 #include <string>
 
-
 struct SDL_Window;
 
 namespace glimbo {
@@ -16,4 +15,4 @@ namespace glimbo {
         int height;
         SDL_Window *sdl_window;
     };
-}
+} // namespace glimbo
