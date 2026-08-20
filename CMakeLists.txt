@@ -2,14 +2,13 @@ cmake_minimum_required(VERSION 4.3)
 project(glimbo LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 23)
+set(BUILD_SHARED_LIBS OFF)
 
 set(LIBRARY_NAME ${PROJECT_NAME}lib)
 set(THIRD_PARTY_LIBRARY_DIRECTORY ${CMAKE_SOURCE_DIR}/src/external)
 
+add_subdirectory(${THIRD_PARTY_LIBRARY_DIRECTORY}/assimp)
 add_subdirectory(${THIRD_PARTY_LIBRARY_DIRECTORY}/pybind11)
-
-set(SDL_SHARED OFF)
-set(SDL_STATIC ON)
 add_subdirectory(${THIRD_PARTY_LIBRARY_DIRECTORY}/SDL)
 
 # glad (doesn't work with add_subdirectory).
@@ -30,6 +29,7 @@ target_include_directories(${LIBRARY_NAME} PUBLIC
 )
 
 target_link_libraries(${LIBRARY_NAME} PRIVATE
+        assimp
         glad
         SDL3::SDL3
 )

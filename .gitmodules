@@ -4,3 +4,6 @@
 [submodule "src/external/SDL"]
 	path = src/external/SDL
 	url = https://github.com/libsdl-org/SDL
+[submodule "src/external/assimp"]
+	path = src/external/assimp
+	url = https://github.com/assimp/assimp
