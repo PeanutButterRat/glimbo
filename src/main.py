@@ -2,7 +2,8 @@ import glimbo
 
 
 def main():
-    glimbo.hello()
+    engine = glimbo.Engine()
+    engine.run()
 
 
 if __name__ == "__main__":

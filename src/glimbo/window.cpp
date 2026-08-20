@@ -1,0 +1,41 @@
+#include "window.h"
+
+#include <SDL3/SDL.h>
+#include <glad/glad.h>
+
+#include <stdexcept>
+
+
+using namespace glimbo;
+
+Window::Window(const int width, const int height, const std::string &title) : width(width), height(height) {
+    if (!SDL_Init(SDL_INIT_VIDEO)) {
+        throw std::runtime_error("Could not initialize SDL.");
+    }
+
+    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    sdl_window = SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL);
+
+    if (!sdl_window) {
+        throw std::runtime_error("Could not create SDL window.");
+    }
+
+    SDL_GLContext context = SDL_GL_CreateContext(sdl_window);
+    if (!context) {
+        throw std::runtime_error("Could not create SDL context.");
+    }
+
+    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(SDL_GL_GetProcAddress))) {
+        throw std::runtime_error("Could not initialize GLAD.");
+    }
+
+    glViewport(0, 0, width, height);
+    glClearColor(0, 0, 0, 1);
+}
+
+Window::~Window() {
+    if (sdl_window) { SDL_DestroyWindow(sdl_window); };
+}
