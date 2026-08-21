@@ -1,8 +1,10 @@
 #include "glimbo/camera.h"
 #include "glimbo/common.h"
+#include "glimbo/component.h"
 #include "glimbo/engine.h"
 #include "glimbo/math.h"
 #include "glimbo/mesh.h"
+#include "glimbo/object.h"
 #include "glimbo/shader.h"
 #include "glimbo/window.h"
 
@@ -14,5 +16,10 @@ PYBIND11_MODULE(glimbo, m, py::mod_gil_not_used()) {
     Camera::bind(m);
     Mesh::bind(m);
     Shader::bind(m);
+    Component::bind(m);
+    Object::bind(m);
+    Model::bind(m);
+    Scene::bind(m);
+
     bind_math(m);
 }

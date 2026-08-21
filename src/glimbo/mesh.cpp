@@ -47,8 +47,7 @@ glimbo::Mesh::Mesh(const std::string &filepath) {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizei>(indices.size() * sizeof(unsigned)), indices.data(), GL_STATIC_DRAW);
 }
 
-void glimbo::Mesh::draw(const Shader &shader) const {
-    shader.use();
+void glimbo::Mesh::draw() const {
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(indices.size()), GL_UNSIGNED_INT, nullptr);
 }
@@ -60,7 +59,7 @@ glimbo::Mesh::~Mesh() {
 }
 
 void glimbo::Mesh::bind(py::module_ &m) {
-    py::class_<Mesh>(m, "Mesh")
+    py::classh<Mesh>(m, "Mesh")
         .def(py::init<const std::string &>())
         .def("draw", &Mesh::draw);
 }

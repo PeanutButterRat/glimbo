@@ -12,6 +12,8 @@ namespace glimbo {
         float near;
         float far;
 
+        Camera() : Camera({1000, 800}, 45, 0.1, 100) {}
+
         Camera(const Vec2 &viewport, float fov, float near, float far) : viewport(viewport), fov(fov), near(near), far(far) {}
 
         Matrix view() const;

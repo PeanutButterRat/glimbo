@@ -27,7 +27,7 @@ namespace glimbo {
     public:
         Mesh(const std::string &filepath);
 
-        void draw(const Shader &shader) const;
+        void draw() const;
 
         ~Mesh();
 

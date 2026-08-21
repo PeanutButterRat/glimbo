@@ -4,20 +4,18 @@
 
 using namespace glimbo;
 
-Engine::Engine() : window(1000, 800, "Glimbo Game Engine"), camera({1000, 800}, 45, 0.1, 100) {}
+Engine::Engine() : window(1000, 800, "Glimbo Game Engine") {}
 
-static float calculate_dt() {
-    static Uint64 previous_frame = SDL_GetPerformanceCounter();
+static float delta() {
+    static Uint64 previous = SDL_GetPerformanceCounter();
     const Uint64 now = SDL_GetPerformanceCounter();
-    const float dt = static_cast<float>(now - previous_frame) / static_cast<float>(SDL_GetPerformanceFrequency());
-    previous_frame = now;
+    const float dt = static_cast<float>(now - previous) / static_cast<float>(SDL_GetPerformanceFrequency());
+    previous = now;
 
     return dt;
 }
 
-void Engine::update() {
-    const float dt = calculate_dt();
-
+void Engine::update() const {
     SDL_Event event;
 
     while (SDL_PollEvent(&event)) {
@@ -26,16 +24,14 @@ void Engine::update() {
         }
     }
 
-    const bool* keys = SDL_GetKeyboardState(nullptr);
-
-    if (keys[SDL_SCANCODE_S]) {
-        camera.position.z -= 1 * dt;
-    }
+    const float dt = delta();
+    scene.update(dt);
 }
 
 void Engine::bind(py::module_ &m) {
     py::class_<Engine>(m, "Engine")
-        .def(py::init<>()).def("update", &Engine::update)
-        .def_readonly("window", &Engine::window)
-        .def_readonly("camera", &Engine::camera);
+            .def(py::init<>())
+            .def("update", &Engine::update)
+            .def_readonly("window", &Engine::window)
+            .def_readonly("scene", &Engine::scene);
 }
