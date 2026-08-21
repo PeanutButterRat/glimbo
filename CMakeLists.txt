@@ -25,6 +25,7 @@ add_library(${LIBRARY_NAME}
         src/glimbo/engine.cpp
         src/glimbo/mesh.cpp
         src/glimbo/shader.cpp
+        src/glimbo/math.cpp
 )
 
 target_include_directories(${LIBRARY_NAME} PUBLIC
