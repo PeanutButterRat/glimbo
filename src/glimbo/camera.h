@@ -18,6 +18,8 @@ namespace glimbo {
 
         Matrix view() const;
 
+        Matrix projection() const;
+
         static void bind(py::module_ &m);
     };
 } // namespace glimbo

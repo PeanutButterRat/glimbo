@@ -9,6 +9,8 @@ Model::Model(const std::shared_ptr<Mesh> &mesh, const std::shared_ptr<Shader> &s
 
 void Model::draw(const Camera &camera) const {
     shader->use();
+    shader->set("projection", camera.projection());
+    shader->set("view", camera.view());
     mesh->draw();
 }
 

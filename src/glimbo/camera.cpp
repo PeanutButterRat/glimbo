@@ -1,5 +1,6 @@
 #include "camera.h"
 
+#include "glm/ext/matrix_clip_space.hpp"
 #include "glm/ext/matrix_transform.hpp"
 
 using namespace glimbo;
@@ -16,6 +17,12 @@ Matrix Camera::view() const {
     const Vec3 right = glm::normalize(glm::cross(up, forward));
 
     return glm::lookAt(position, position + forward, right);
+
+}
+
+Matrix Camera::projection() const {
+    const float aspect = viewport.x / viewport.y;
+    return glm::perspective(glm::radians(fov), aspect, near, far);
 }
 
 void Camera::bind(py::module_ &m) {

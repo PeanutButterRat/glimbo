@@ -38,8 +38,13 @@ Shader::GLSLShader::GLSLShader(const std::string &shader, const GLenum type) {
     glGetShaderiv(id, GL_COMPILE_STATUS, &successful);
 
     if (!successful) {
+        GLint length = 0;
+        glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
+        std::vector<GLchar> error(length);
+        glGetShaderInfoLog(id, length, &length, error.data());
+
         glDeleteShader(id);
-        throw std::runtime_error("failed to compile shader");
+        throw std::runtime_error(error.data());
     }
 }
 

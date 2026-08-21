@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(BUILD_SHARED_LIBS OFF)
 
 set(LIBRARY_NAME ${PROJECT_NAME}lib)
+set(PACKAGE_NAME ${PROJECT_NAME}py)
 set(THIRD_PARTY_LIBRARY_DIRECTORY ${CMAKE_SOURCE_DIR}/src/external)
 
 add_subdirectory(${THIRD_PARTY_LIBRARY_DIRECTORY}/assimp)
@@ -32,9 +33,7 @@ add_library(${LIBRARY_NAME}
         src/glimbo/scene.cpp
 )
 
-target_include_directories(${LIBRARY_NAME} PUBLIC
-        src
-)
+target_include_directories(${LIBRARY_NAME} PUBLIC src)
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC
         assimp
@@ -44,6 +43,15 @@ target_link_libraries(${LIBRARY_NAME} PUBLIC
         pybind11::pybind11
 )
 
-pybind11_add_module(${PROJECT_NAME} src/bindings/glimbo.cpp)
+# Python package.
+pybind11_add_module(${PACKAGE_NAME} src/bindings/glimbo.cpp)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBRARY_NAME})
+target_link_libraries(${PACKAGE_NAME} PRIVATE ${LIBRARY_NAME})
+
+# Main executable.
+add_executable(${PROJECT_NAME} src/main.cpp)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+        ${LIBRARY_NAME}
+        pybind11::embed
+)
