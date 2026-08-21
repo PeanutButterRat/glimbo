@@ -8,6 +8,7 @@ set(LIBRARY_NAME ${PROJECT_NAME}lib)
 set(THIRD_PARTY_LIBRARY_DIRECTORY ${CMAKE_SOURCE_DIR}/src/external)
 
 add_subdirectory(${THIRD_PARTY_LIBRARY_DIRECTORY}/assimp)
+add_subdirectory(${THIRD_PARTY_LIBRARY_DIRECTORY}/glm)
 add_subdirectory(${THIRD_PARTY_LIBRARY_DIRECTORY}/pybind11)
 add_subdirectory(${THIRD_PARTY_LIBRARY_DIRECTORY}/SDL)
 
@@ -33,6 +34,7 @@ target_include_directories(${LIBRARY_NAME} PUBLIC
 target_link_libraries(${LIBRARY_NAME} PUBLIC
         assimp
         glad
+        glm
         SDL3::SDL3
 )
 
