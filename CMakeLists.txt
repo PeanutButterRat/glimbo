@@ -36,8 +36,9 @@ target_link_libraries(${LIBRARY_NAME} PUBLIC
         glad
         glm
         SDL3::SDL3
+        pybind11::pybind11
 )
 
-pybind11_add_module(${PROJECT_NAME} src/bindings/module.cpp)
+pybind11_add_module(${PROJECT_NAME} src/bindings/glimbo.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBRARY_NAME})

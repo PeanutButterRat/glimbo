@@ -5,6 +5,8 @@
 
 #include <glad/glad.h>
 
+#include "glimbo/common.h"
+
 namespace glimbo {
     struct Shader;
 
@@ -28,5 +30,7 @@ namespace glimbo {
         void draw(const Shader &shader) const;
 
         ~Mesh();
+
+        static void bind(py::module_ &m);
     };
 } // namespace glimbo

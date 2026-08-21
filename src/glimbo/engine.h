@@ -1,5 +1,6 @@
 #pragma once
 
+#include "glimbo/common.h"
 #include "glimbo/window.h"
 
 namespace glimbo {
@@ -9,6 +10,8 @@ namespace glimbo {
         void update();
 
         Window window;
+
+        static void bind(py::module_ &m);
 
     private:
         uint64_t last_frame = 0;

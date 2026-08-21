@@ -6,10 +6,17 @@ using namespace glimbo;
 
 Engine::Engine() : window(1000, 800, "Glimbo Game Engine") {}
 
+static float calculate_dt() {
+    static Uint64 previous_frame = SDL_GetPerformanceCounter();
+    const Uint64 now = SDL_GetPerformanceCounter();
+    const float dt = static_cast<float>(now - previous_frame) / static_cast<float>(SDL_GetPerformanceFrequency());
+    previous_frame = now;
+
+    return dt;
+}
+
 void Engine::update() {
-    const uint64_t now = SDL_GetPerformanceCounter();
-    const float dt = static_cast<float>(last_frame - now) / static_cast<float>(SDL_GetPerformanceFrequency());
-    last_frame = now;
+    const float dt = calculate_dt();
 
     SDL_Event event;
 
@@ -18,4 +25,10 @@ void Engine::update() {
             exit(0);
         }
     }
+}
+
+void Engine::bind(py::module_ &m) {
+    py::class_<Engine>(m, "Engine")
+        .def(py::init<>()).def("update", &Engine::update)
+        .def_readonly("window", &Engine::window);
 }

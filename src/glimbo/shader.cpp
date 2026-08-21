@@ -36,3 +36,8 @@ Shader::GLSLShader::GLSLShader(const std::string &shader, const GLenum type) {
         throw std::runtime_error("failed to compile shader");
     }
 }
+
+void Shader::bind(py::module_ &m) {
+    py::class_<Shader>(m, "Shader")
+        .def(py::init<const std::string &, const std::string &>());
+}

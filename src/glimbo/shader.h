@@ -4,6 +4,8 @@
 
 #include <glad/glad.h>
 
+#include "glimbo/common.h"
+
 namespace glimbo {
     struct Shader {
         GLuint id = 0;
@@ -22,5 +24,8 @@ namespace glimbo {
 
             ~GLSLShader() { glDeleteShader(id); };
         };
+
+    public:
+        static void bind(py::module_ &m);
     };
 } // namespace glimbo

@@ -58,3 +58,9 @@ glimbo::Mesh::~Mesh() {
     glDeleteBuffers(1, &vbo);
     glDeleteBuffers(1, &ebo);
 }
+
+void glimbo::Mesh::bind(py::module_ &m) {
+    py::class_<Mesh>(m, "Mesh")
+        .def(py::init<const std::string &>())
+        .def("draw", &Mesh::draw);
+}
