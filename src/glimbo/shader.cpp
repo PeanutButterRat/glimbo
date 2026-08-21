@@ -22,6 +22,12 @@ Shader::Shader(const std::string &vertex, const std::string &fragment) {
     }
 }
 
+void Shader::set(const std::string &uniform, const Matrix &value) const {
+    glUseProgram(id);
+    const int location = glGetUniformLocation(id, uniform.c_str());
+    glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
+}
+
 Shader::GLSLShader::GLSLShader(const std::string &shader, const GLenum type) {
     const char *source = shader.c_str();
     id = glCreateShader(type);
@@ -39,5 +45,6 @@ Shader::GLSLShader::GLSLShader(const std::string &shader, const GLenum type) {
 
 void Shader::bind(py::module_ &m) {
     py::class_<Shader>(m, "Shader")
-        .def(py::init<const std::string &, const std::string &>());
+        .def(py::init<const std::string &, const std::string &>())
+        .def("set", &Shader::set);
 }

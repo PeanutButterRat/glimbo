@@ -5,6 +5,7 @@
 #include <glad/glad.h>
 
 #include "glimbo/common.h"
+#include "glimbo/math.h"
 
 namespace glimbo {
     struct Shader {
@@ -13,6 +14,8 @@ namespace glimbo {
         Shader(const std::string &vertex, const std::string &fragment);
 
         void use() const { glUseProgram(id); }
+
+        void set(const std::string &uniform, const Matrix &value) const;
 
         ~Shader() { glDeleteProgram(id); };
 

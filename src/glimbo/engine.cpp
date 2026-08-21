@@ -4,7 +4,7 @@
 
 using namespace glimbo;
 
-Engine::Engine() : window(1000, 800, "Glimbo Game Engine") {}
+Engine::Engine() : window(1000, 800, "Glimbo Game Engine"), camera({1000, 800}, 45, 0.1, 100) {}
 
 static float calculate_dt() {
     static Uint64 previous_frame = SDL_GetPerformanceCounter();
@@ -25,10 +25,17 @@ void Engine::update() {
             exit(0);
         }
     }
+
+    const bool* keys = SDL_GetKeyboardState(nullptr);
+
+    if (keys[SDL_SCANCODE_S]) {
+        camera.position.z -= 1 * dt;
+    }
 }
 
 void Engine::bind(py::module_ &m) {
     py::class_<Engine>(m, "Engine")
         .def(py::init<>()).def("update", &Engine::update)
-        .def_readonly("window", &Engine::window);
+        .def_readonly("window", &Engine::window)
+        .def_readonly("camera", &Engine::camera);
 }
