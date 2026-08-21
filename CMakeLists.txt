@@ -22,13 +22,15 @@ target_include_directories(glad PUBLIC
 add_library(${LIBRARY_NAME}
         src/glimbo/window.cpp
         src/glimbo/engine.cpp
+        src/glimbo/mesh.cpp
+        src/glimbo/shader.cpp
 )
 
 target_include_directories(${LIBRARY_NAME} PUBLIC
         src
 )
 
-target_link_libraries(${LIBRARY_NAME} PRIVATE
+target_link_libraries(${LIBRARY_NAME} PUBLIC
         assimp
         glad
         SDL3::SDL3

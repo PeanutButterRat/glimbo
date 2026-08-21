@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstdint>
-
 #include "glimbo/window.h"
 
 namespace glimbo {
@@ -10,10 +8,9 @@ namespace glimbo {
 
         void update();
 
-        void run();
+        Window window;
 
     private:
         uint64_t last_frame = 0;
-        Window window;
     };
 } // namespace glimbo

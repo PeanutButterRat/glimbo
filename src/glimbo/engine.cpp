@@ -19,9 +19,3 @@ void Engine::update() {
         }
     }
 }
-
-void Engine::run() {
-    while (true) {
-        update();
-    }
-}
