@@ -19,13 +19,13 @@ Window::Window(const int width, const int height, const std::string &title) : wi
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    sdl = SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL);
+    window = SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL);
 
-    if (!sdl) {
+    if (!window) {
         throw std::runtime_error("Could not create SDL window.");
     }
 
-    SDL_GLContext context = SDL_GL_CreateContext(sdl);
+    context = SDL_GL_CreateContext(window);
     if (!context) {
         throw std::runtime_error("Could not create SDL context.");
     }
@@ -34,21 +34,25 @@ Window::Window(const int width, const int height, const std::string &title) : wi
         throw std::runtime_error("Could not initialize GLAD.");
     }
 
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, width - 200, height);
     glClearColor(0, 0, 0, 1);
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGui_ImplSDL3_InitForOpenGL(sdl, context);
+    ImGui_ImplSDL3_InitForOpenGL(window, context);
     ImGui_ImplOpenGL3_Init();
 }
 
 Window::~Window() {
-    if (sdl) {
-        SDL_DestroyWindow(sdl);
+    if (window) {
+        SDL_DestroyWindow(window);
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplSDL3_Shutdown();
         ImGui::DestroyContext();
+
+        SDL_GL_DestroyContext(context);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
     };
 }
 

@@ -12,6 +12,7 @@ namespace glimbo {
         Vec3 position = Vec3(0, 0, 0);
         Vec3 rotation = Vec3(0, 0, 0);
         Vec3 scale = Vec3(1, 1, 1);
+        bool visible = true;
         std::vector<std::shared_ptr<Component>> components;
 
         void add(const std::shared_ptr<Component> &component);

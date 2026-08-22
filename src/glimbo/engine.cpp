@@ -1,10 +1,11 @@
 #include "engine.h"
 
 #include <SDL3/SDL.h>
+#include <imgui_impl_sdl3.h>
 
 using namespace glimbo;
 
-Engine::Engine() : window(1000, 800, "Glimbo Game Engine") {}
+Engine::Engine() : window(1200, 800, "Glimbo Game Engine") {}
 
 static float delta() {
     static Uint64 previous = SDL_GetPerformanceCounter();
@@ -19,8 +20,19 @@ float Engine::update() const {
     SDL_Event event;
 
     while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_EVENT_QUIT) {
-            exit(0);
+        ImGui_ImplSDL3_ProcessEvent(&event);
+
+        switch (event.type) {
+            case SDL_EVENT_QUIT:
+                exit(0);
+                break;
+            case SDL_EVENT_MOUSE_BUTTON_DOWN:
+                if (event.button.button == SDL_BUTTON_LEFT) {
+                    for (const auto &callback: callbacks) {
+                        callback(event.button.x, event.button.y);
+                    }
+                }
+                break;
         }
     }
 

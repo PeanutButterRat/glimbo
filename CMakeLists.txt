@@ -48,6 +48,7 @@ add_library(${LIBRARY_NAME}
         src/glimbo/object.cpp
         src/glimbo/component.cpp
         src/glimbo/scene.cpp
+        src/glimbo/element.cpp
 )
 
 target_include_directories(${LIBRARY_NAME} PUBLIC src)

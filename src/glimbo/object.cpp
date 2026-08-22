@@ -16,8 +16,10 @@ void Object::update(const float dt) const {
 }
 
 void Object::draw(const Camera &camera) const {
-    for (const auto &component: components) {
-        component->draw(camera);
+    if (visible) {
+        for (const auto &component: components) {
+            component->draw(camera);
+        }
     }
 }
 
