@@ -4,8 +4,6 @@
 #include "glimbo/common.h"
 #include "glimbo/engine.h"
 
-#include <glad/glad.h>
-
 using namespace glimbo;
 
 static std::string read(const std::string &filepath) {

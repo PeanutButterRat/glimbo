@@ -15,7 +15,7 @@ namespace glimbo {
 
         void clear() const { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
-        void refresh() const { SDL_GL_SwapWindow(sdl_window); }
+        void refresh() const { SDL_GL_SwapWindow(sdl); }
 
         ~Window();
 
@@ -24,6 +24,6 @@ namespace glimbo {
     private:
         int width;
         int height;
-        SDL_Window *sdl_window;
+        SDL_Window *sdl;
     };
 } // namespace glimbo

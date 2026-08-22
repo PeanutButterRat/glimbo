@@ -7,6 +7,7 @@ set(BUILD_SHARED_LIBS OFF)
 set(LIBRARY_NAME ${PROJECT_NAME}lib)
 set(PACKAGE_NAME ${PROJECT_NAME}py)
 set(THIRD_PARTY_LIBRARY_DIRECTORY ${CMAKE_SOURCE_DIR}/src/external)
+set(IMGUI_DIRECTORY ${THIRD_PARTY_LIBRARY_DIRECTORY}/imgui)
 
 add_subdirectory(${THIRD_PARTY_LIBRARY_DIRECTORY}/assimp)
 add_subdirectory(${THIRD_PARTY_LIBRARY_DIRECTORY}/glm)
@@ -20,6 +21,22 @@ add_library(glad
 target_include_directories(glad PUBLIC
         ${THIRD_PARTY_LIBRARY_DIRECTORY}/glad/include
 )
+
+# ImGui (also doesn't work with add_subdirectory).
+add_library(imgui
+        ${IMGUI_DIRECTORY}/imgui.cpp
+        ${IMGUI_DIRECTORY}/imgui_demo.cpp
+        ${IMGUI_DIRECTORY}/imgui_draw.cpp
+        ${IMGUI_DIRECTORY}/imgui_tables.cpp
+        ${IMGUI_DIRECTORY}/imgui_widgets.cpp
+        ${IMGUI_DIRECTORY}/backends/imgui_impl_sdl3.cpp
+        ${IMGUI_DIRECTORY}/backends/imgui_impl_opengl3.cpp
+)
+target_include_directories(imgui PUBLIC
+        ${IMGUI_DIRECTORY}
+        ${IMGUI_DIRECTORY}/backends
+)
+target_link_libraries(imgui PUBLIC SDL3::SDL3)
 
 add_library(${LIBRARY_NAME}
         src/glimbo/window.cpp
@@ -39,6 +56,7 @@ target_link_libraries(${LIBRARY_NAME} PUBLIC
         assimp
         glad
         glm
+        imgui
         SDL3::SDL3
         pybind11::pybind11
 )
