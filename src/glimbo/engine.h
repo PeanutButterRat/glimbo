@@ -11,7 +11,7 @@ namespace glimbo {
 
         Engine();
 
-        void update() const;
+        float update() const;
 
         static void bind(py::module_ &m);
     };

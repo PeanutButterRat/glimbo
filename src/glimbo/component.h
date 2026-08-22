@@ -6,7 +6,11 @@
 #include "glimbo/shader.h"
 
 namespace glimbo {
+    struct Object;
+
     struct Component {
+        Object *owner;
+
         virtual void update(float dt) {}
 
         virtual void draw(const Camera &camera) const {}

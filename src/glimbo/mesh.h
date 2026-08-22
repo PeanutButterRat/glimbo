@@ -6,18 +6,11 @@
 #include <glad/glad.h>
 
 #include "glimbo/common.h"
+#include "glimbo/math.h"
 
 namespace glimbo {
-    struct Shader;
-
     class Mesh {
-        struct Vertex {
-            float x, y, z;
-
-            Vertex(float x, float y, float z) : x(x), y(y), z(z) {}
-        };
-
-        std::vector<Vertex> vertices;
+        std::vector<Vec3> vertices;
         std::vector<unsigned> indices;
 
         GLuint vao = 0;

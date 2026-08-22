@@ -4,6 +4,8 @@
 #include "glimbo/common.h"
 #include "glimbo/engine.h"
 
+#include <glad/glad.h>
+
 using namespace glimbo;
 
 static std::string read(const std::string &filepath) {
@@ -29,10 +31,13 @@ int main() {
     auto cube = std::make_shared<Object>();
     cube->add(model);
     engine.scene.add(cube);
-    engine.scene.camera.position.z += 10;
+
+    engine.scene.camera.position += Vec3(0, 2, 10);
+    engine.scene.camera.rotation.x -= 10;
 
     while (true) {
-        engine.update();
+        float dt = engine.update();
+        cube->rotation.y += dt * 90;
         engine.window.clear();
         engine.scene.draw();
         engine.window.refresh();

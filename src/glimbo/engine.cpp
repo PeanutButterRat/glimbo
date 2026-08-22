@@ -15,7 +15,7 @@ static float delta() {
     return dt;
 }
 
-void Engine::update() const {
+float Engine::update() const {
     SDL_Event event;
 
     while (SDL_PollEvent(&event)) {
@@ -26,6 +26,8 @@ void Engine::update() const {
 
     const float dt = delta();
     scene.update(dt);
+
+    return dt;
 }
 
 void Engine::bind(py::module_ &m) {
