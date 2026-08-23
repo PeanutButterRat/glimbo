@@ -44,7 +44,7 @@ int main() {
     button->callback = [&cube]() -> void { cube->visible = !cube->visible; };
     panel->add(button);
 
-    engine.callbacks.emplace_back([](float x, float y) -> void {
+    engine.mouse.pressed.connect([](float x, float y) -> void {
         std::cout << x << ' ' << y << std::endl;
     });
 

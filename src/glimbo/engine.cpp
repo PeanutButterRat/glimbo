@@ -27,11 +27,7 @@ float Engine::update() const {
                 exit(0);
                 break;
             case SDL_EVENT_MOUSE_BUTTON_DOWN:
-                if (event.button.button == SDL_BUTTON_LEFT) {
-                    for (const auto &callback: callbacks) {
-                        callback(event.button.x, event.button.y);
-                    }
-                }
+                mouse.handle(event);
                 break;
         }
     }
