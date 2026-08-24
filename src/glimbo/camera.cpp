@@ -24,9 +24,3 @@ Matrix Camera::projection() const {
     const float aspect = viewport.x / viewport.y;
     return glm::perspective(glm::radians(fov), aspect, near, far);
 }
-
-void Camera::bind(py::module_ &m) {
-    py::class_<Camera>(m, "Camera")
-        .def_readwrite("position", &Camera::position)
-        .def("view", &Camera::view);
-}

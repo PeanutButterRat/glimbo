@@ -3,7 +3,6 @@
 #include <vector>
 
 #include "glimbo/camera.h"
-#include "glimbo/common.h"
 #include "glimbo/component.h"
 #include "glimbo/math.h"
 
@@ -22,7 +21,5 @@ namespace glimbo {
         void draw(const Camera &camera) const;
 
         Matrix model() const;
-
-        static void bind(py::module_ &m);
     };
 } // namespace glimbo

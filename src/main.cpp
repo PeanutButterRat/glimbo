@@ -1,7 +1,7 @@
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
-#include "glimbo/common.h"
 #include "glimbo/element.h"
 #include "glimbo/engine.h"
 
@@ -44,9 +44,7 @@ int main() {
     button->callback = [&cube]() -> void { cube->visible = !cube->visible; };
     panel->add(button);
 
-    engine.mouse.pressed.connect([](float x, float y) -> void {
-        std::cout << x << ' ' << y << std::endl;
-    });
+    engine.mouse.pressed.connect([](float x, float y) -> void { std::cout << x << ' ' << y << std::endl; });
 
     while (true) {
         float dt = engine.update();

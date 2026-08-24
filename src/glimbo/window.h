@@ -5,8 +5,6 @@
 #include <SDL3/SDL.h>
 #include <glad/glad.h>
 
-#include "glimbo/common.h"
-
 struct SDL_Window;
 
 namespace glimbo {
@@ -18,8 +16,6 @@ namespace glimbo {
         void refresh() const { SDL_GL_SwapWindow(window); }
 
         ~Window();
-
-        static void bind(py::module_ &m);
 
     private:
         int width;

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "glimbo/common.h"
 #include "glimbo/math.h"
 
 namespace glimbo {
@@ -19,7 +18,5 @@ namespace glimbo {
         Matrix view() const;
 
         Matrix projection() const;
-
-        static void bind(py::module_ &m);
     };
 } // namespace glimbo

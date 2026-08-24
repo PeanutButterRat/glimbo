@@ -60,7 +60,6 @@ target_link_libraries(${LIBRARY_NAME} PUBLIC
         glm
         imgui
         SDL3::SDL3
-        pybind11::pybind11
 )
 
 # Python package.
@@ -73,5 +72,4 @@ add_executable(${PROJECT_NAME} src/main.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
         ${LIBRARY_NAME}
-        pybind11::embed
 )

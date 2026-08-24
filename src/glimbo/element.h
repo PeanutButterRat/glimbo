@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <memory>
 #include <string>
 
 #include "glimbo/math.h"
@@ -10,7 +11,9 @@ namespace glimbo {
         std::vector<std::shared_ptr<Element>> children;
 
         void add(const std::shared_ptr<Element> &child) { children.push_back(child); }
+
         virtual void draw() {}
+
         virtual ~Element() = default;
     };
 

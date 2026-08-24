@@ -47,9 +47,3 @@ Shader::GLSLShader::GLSLShader(const std::string &shader, const GLenum type) {
         throw std::runtime_error(error.data());
     }
 }
-
-void Shader::bind(py::module_ &m) {
-    py::classh<Shader>(m, "Shader")
-        .def(py::init<const std::string &, const std::string &>())
-        .def("set", &Shader::set);
-}

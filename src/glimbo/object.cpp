@@ -31,9 +31,3 @@ Matrix Object::model() const {
     model = glm::scale(model, scale);
     return model;
 }
-
-void Object::bind(py::module_ &m) {
-    py::classh<Object>(m, "Object")
-        .def(py::init<>())
-        .def("add", &Object::add);
-}

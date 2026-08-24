@@ -37,11 +37,3 @@ float Engine::update() const {
 
     return dt;
 }
-
-void Engine::bind(py::module_ &m) {
-    py::class_<Engine>(m, "Engine")
-            .def(py::init<>())
-            .def("update", &Engine::update)
-            .def_readonly("window", &Engine::window)
-            .def_readonly("scene", &Engine::scene);
-}

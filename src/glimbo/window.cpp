@@ -55,9 +55,3 @@ Window::~Window() {
         SDL_Quit();
     };
 }
-
-void Window::bind(py::module_ &m) {
-    py::class_<Window>(m, "Window")
-        .def("clear", &Window::clear)
-        .def("refresh", &Window::refresh);
-}

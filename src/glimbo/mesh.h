@@ -5,7 +5,6 @@
 
 #include <glad/glad.h>
 
-#include "glimbo/common.h"
 #include "glimbo/math.h"
 
 namespace glimbo {
@@ -23,7 +22,5 @@ namespace glimbo {
         void draw() const;
 
         ~Mesh();
-
-        static void bind(py::module_ &m);
     };
 } // namespace glimbo

@@ -4,7 +4,6 @@
 
 #include <glad/glad.h>
 
-#include "glimbo/common.h"
 #include "glimbo/math.h"
 
 namespace glimbo {
@@ -27,8 +26,5 @@ namespace glimbo {
 
             ~GLSLShader() { glDeleteShader(id); };
         };
-
-    public:
-        static void bind(py::module_ &m);
     };
 } // namespace glimbo

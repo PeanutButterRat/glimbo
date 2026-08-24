@@ -1,6 +1,5 @@
 #pragma once
 
-#include "glimbo/common.h"
 #include "glimbo/element.h"
 #include "glimbo/object.h"
 
@@ -17,7 +16,5 @@ namespace glimbo {
         void update(float dt) const;
 
         void draw() const;
-
-        static void bind(py::module_ &m);
     };
 } // namespace glimbo
