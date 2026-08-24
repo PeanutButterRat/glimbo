@@ -14,6 +14,6 @@ namespace glimbo {
 
         Engine();
 
-        float update() const;
+        float poll() const;
     };
 } // namespace glimbo

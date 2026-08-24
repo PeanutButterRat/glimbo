@@ -12,7 +12,7 @@ void Scene::update(const float dt) const {
     }
 }
 
-void Scene::draw() const {
+void Scene::draw() {
     for (const auto &object: objects) {
         object->draw(camera);
     }
@@ -21,9 +21,7 @@ void Scene::draw() const {
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
 
-    for (const auto &element: elements) {
-        element->draw();
-    }
+    ui.draw();
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

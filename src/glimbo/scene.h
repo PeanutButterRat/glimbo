@@ -6,15 +6,13 @@
 namespace glimbo {
     struct Scene {
         std::vector<std::shared_ptr<Object>> objects;
-        std::vector<std::shared_ptr<Element>> elements;
+        Element ui;
         Camera camera;
 
         void add(const std::shared_ptr<Object> &object) { objects.push_back(object); }
 
-        void add(const std::shared_ptr<Element> &element) { elements.push_back(element); }
-
         void update(float dt) const;
 
-        void draw() const;
+        void draw();
     };
 } // namespace glimbo

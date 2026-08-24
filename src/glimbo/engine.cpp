@@ -16,7 +16,7 @@ static float delta() {
     return dt;
 }
 
-float Engine::update() const {
+float Engine::poll() const {
     SDL_Event event;
 
     while (SDL_PollEvent(&event)) {
@@ -32,8 +32,5 @@ float Engine::update() const {
         keyboard.handle(event);
     }
 
-    const float dt = delta();
-    scene.update(dt);
-
-    return dt;
+    return delta();
 }

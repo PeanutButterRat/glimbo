@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "glimbo/editor.h"
 #include "glimbo/element.h"
 #include "glimbo/engine.h"
 
@@ -21,6 +22,8 @@ static std::string read(const std::string &filepath) {
 
 int main() {
     Engine engine;
+    Editor editor{engine};
+
     auto mesh = std::make_shared<Mesh>("assets/models/cube.glb");
     const std::string vertex = read("assets/shaders/vertex.glsl");
     const std::string fragment = read("assets/shaders/fragment.glsl");
@@ -34,22 +37,8 @@ int main() {
     engine.scene.camera.position += Vec3(0, 2, 10);
     engine.scene.camera.rotation.x -= 10;
 
-    auto panel = std::make_shared<Panel>();
-    panel->position.x = 1000;
-    panel->size = {200, 800};
-    engine.scene.add(panel);
-
-    auto button = std::make_shared<Button>();
-    button->label = "Toggle Visibility";
-    button->callback = [&cube]() -> void { cube->visible = !cube->visible; };
-    panel->add(button);
-
-    engine.mouse.pressed.connect([](float x, float y) -> void { std::cout << x << ' ' << y << std::endl; });
-    engine.keyboard.pressed.connect([](int a) -> void { std::cout << a << std::endl; });
-
     while (true) {
-        float dt = engine.update();
-        cube->rotation.y += dt * 90;
+        editor.update();
         engine.window.clear();
         engine.scene.draw();
         engine.window.refresh();

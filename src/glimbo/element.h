@@ -9,17 +9,20 @@
 namespace glimbo {
     struct Element {
         std::vector<std::shared_ptr<Element>> children;
+        bool visible = true;
 
         void add(const std::shared_ptr<Element> &child) { children.push_back(child); }
 
-        virtual void draw() {}
+        virtual void draw();
 
         virtual ~Element() = default;
     };
 
     struct Panel : Element {
+        std::string title;
         Vec2 size;
         Vec2 position;
+        bool closeable = true;
 
         void draw() override;
     };
@@ -30,4 +33,5 @@ namespace glimbo {
 
         void draw() override;
     };
+
 } // namespace glimbo

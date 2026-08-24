@@ -41,6 +41,8 @@ Window::Window(const int width, const int height, const std::string &title) : wi
     ImGui::CreateContext();
     ImGui_ImplSDL3_InitForOpenGL(window, context);
     ImGui_ImplOpenGL3_Init();
+    ImGuiIO& io = ImGui::GetIO();
+    io.IniFilename = nullptr;
 }
 
 Window::~Window() {
