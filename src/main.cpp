@@ -45,6 +45,7 @@ int main() {
     panel->add(button);
 
     engine.mouse.pressed.connect([](float x, float y) -> void { std::cout << x << ' ' << y << std::endl; });
+    engine.keyboard.pressed.connect([](int a) -> void { std::cout << a << std::endl; });
 
     while (true) {
         float dt = engine.update();

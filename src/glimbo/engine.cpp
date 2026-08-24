@@ -26,10 +26,10 @@ float Engine::update() const {
             case SDL_EVENT_QUIT:
                 exit(0);
                 break;
-            case SDL_EVENT_MOUSE_BUTTON_DOWN:
-                mouse.handle(event);
-                break;
         }
+
+        mouse.handle(event);
+        keyboard.handle(event);
     }
 
     const float dt = delta();

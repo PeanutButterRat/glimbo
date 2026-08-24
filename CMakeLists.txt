@@ -50,6 +50,7 @@ add_library(${LIBRARY_NAME}
         src/glimbo/scene.cpp
         src/glimbo/element.cpp
         src/glimbo/mouse.cpp
+        src/glimbo/keyboard.cpp
 )
 
 target_include_directories(${LIBRARY_NAME} PUBLIC src)

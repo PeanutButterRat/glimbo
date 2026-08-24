@@ -1,5 +1,6 @@
 #pragma once
 
+#include "glimbo/keyboard.h"
 #include "glimbo/mouse.h"
 #include "glimbo/scene.h"
 #include "glimbo/window.h"
@@ -9,6 +10,7 @@ namespace glimbo {
         Window window;
         Scene scene;
         Mouse mouse;
+        Keyboard keyboard;
 
         Engine();
 
