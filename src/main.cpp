@@ -31,8 +31,9 @@ int main() {
     auto model = std::make_shared<Model>(mesh, shader);
 
     auto cube = std::make_shared<Object>();
+    cube->name = "Cube";
     cube->add(model);
-    engine.scene.add(cube);
+    editor.add(cube);
 
     while (true) {
         editor.update();

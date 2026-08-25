@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 
+#include "glimbo/event.h"
 #include "glimbo/math.h"
 
 namespace glimbo {
@@ -34,4 +35,18 @@ namespace glimbo {
         void draw() override;
     };
 
+    struct List : Element {
+        Event<int> selected;
+        std::vector<std::string> items;
+
+        void draw() override;
+    };
+
+    struct Input : Element {
+        std::string label;
+        Event<float, float, float> changed;
+        float value[3] = {0, 0, 0};
+
+        void draw() override;
+    };
 } // namespace glimbo

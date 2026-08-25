@@ -43,6 +43,7 @@ Window::Window(const int width, const int height, const std::string &title) : wi
     ImGui_ImplOpenGL3_Init();
     ImGuiIO& io = ImGui::GetIO();
     io.IniFilename = nullptr;
+    io.ConfigDragClickToInputText = true;
 }
 
 Window::~Window() {
