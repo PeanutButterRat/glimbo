@@ -18,5 +18,7 @@ namespace glimbo {
         Matrix view() const;
 
         Matrix projection() const;
+
+        void look(const Vec3 &at);
     };
 } // namespace glimbo

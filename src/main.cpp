@@ -34,14 +34,8 @@ int main() {
     cube->add(model);
     engine.scene.add(cube);
 
-    engine.scene.camera.position += Vec3(0, 2, 10);
-    engine.scene.camera.rotation.x -= 10;
-
     while (true) {
         editor.update();
-        engine.window.clear();
-        engine.scene.draw();
-        engine.window.refresh();
     }
 
     return 0;
