@@ -4,8 +4,8 @@
 
 namespace glimbo {
     struct Camera {
-        Vec3 position{0, 0, 0};
-        Vec3 rotation{0, 0, 0};
+        Vec3 position = {0, 0, 0};
+        Vec3 rotation = {0, 0, 0};
         Vec2 viewport;
         float fov;
         float near;
@@ -19,6 +19,6 @@ namespace glimbo {
 
         Matrix projection() const;
 
-        void look(const Vec3 &at);
+        void look_at(const Vec3 &target);
     };
 } // namespace glimbo

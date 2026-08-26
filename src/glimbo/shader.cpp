@@ -1,6 +1,7 @@
 #include "shader.h"
 
 #include <stdexcept>
+#include <vector>
 
 using namespace glimbo;
 
@@ -25,7 +26,7 @@ Shader::Shader(const std::string &vertex, const std::string &fragment) {
 void Shader::set(const std::string &uniform, const Matrix &value) const {
     glUseProgram(id);
     const int location = glGetUniformLocation(id, uniform.c_str());
-    glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
+    glUniformMatrix4fv(location, 1, GL_FALSE, value.buffer());
 }
 
 Shader::GLSLShader::GLSLShader(const std::string &shader, const GLenum type) {
@@ -39,6 +40,7 @@ Shader::GLSLShader::GLSLShader(const std::string &shader, const GLenum type) {
 
     if (!successful) {
         GLint length = 0;
+
         glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
         std::vector<GLchar> error(length);
         glGetShaderInfoLog(id, length, &length, error.data());

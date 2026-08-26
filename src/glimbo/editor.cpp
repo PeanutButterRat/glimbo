@@ -13,7 +13,7 @@ Editor::Editor(Engine &engine) : engine(engine) {
 
     auto panel = std::make_shared<Panel>();
     panel->title = "Scene";
-    panel->position.x = 1000;
+    panel->position[0] = 1000;
     panel->size = {200, 400};
     panel->closeable = false;
     panel->add(list);
@@ -21,8 +21,8 @@ Editor::Editor(Engine &engine) : engine(engine) {
 
     panel = std::make_shared<Panel>();
     panel->title = "Properties";
-    panel->position.x = 1000;
-    panel->position.y = 400;
+    panel->position[0] = 1000;
+    panel->position[1] = 400;
     panel->size = {200, 400};
     panel->closeable = false;
     engine.scene.ui.add(panel);
@@ -33,9 +33,9 @@ Editor::Editor(Engine &engine) : engine(engine) {
 
     input->changed.connect([&](float x, float y, float z) -> void {
         if (focused) {
-            focused->position.x = x;
-            focused->position.y = y;
-            focused->position.z = z;
+            focused->position[0] = x;
+            focused->position[1] = y;
+            focused->position[2] = z;
         }
     });
 
@@ -66,12 +66,12 @@ void Editor::update() const {
     const float dt = engine.poll();
 
     engine.scene.camera.position = {
-            distance * cos(glm::radians(inclination)) * sin(glm::radians(azimuth)),
-            distance * sin(glm::radians(inclination)),
-            distance * cos(glm::radians(inclination)) * cos(glm::radians(azimuth)),
+            distance * cos(radians(inclination)) * sin(radians(azimuth)),
+            distance * sin(radians(inclination)),
+            distance * cos(radians(inclination)) * cos(radians(azimuth)),
     };
     const Vec3 focus = focused ? focused->position : Vec3(0, 0, 0);
-    engine.scene.camera.look(focus);
+    engine.scene.camera.look_at(focus);
 
     engine.window.clear();
     engine.scene.draw();

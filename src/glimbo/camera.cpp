@@ -1,34 +1,33 @@
 #include "camera.h"
 
-#include "glm/ext/matrix_clip_space.hpp"
-#include "glm/ext/matrix_transform.hpp"
+#include <cmath>
 
 using namespace glimbo;
 
 Matrix Camera::view() const {
-    const float pitch = glm::radians(rotation.x);
-    const float yaw = glm::radians(rotation.y);
+    const float pitch = radians(rotation[0]);
+    const float yaw = radians(rotation[1]);
 
     const Vec3 forward = {
-            sinf(yaw) * cosf(pitch),
-            sinf(pitch),
-            -cosf(yaw) * cosf(pitch),
+        sinf(yaw) * cosf(pitch),
+        sinf(pitch),
+        -cosf(yaw) * cosf(pitch),
     };
 
-    return glm::lookAt(position, position + forward, {0, 1, 0});
+    return Matrix::look_at(position, position + forward, {0, 1, 0});
 }
 
 Matrix Camera::projection() const {
-    const float aspect = viewport.x / viewport.y;
-    return glm::perspective(glm::radians(fov), aspect, near, far);
+    const float aspect = viewport[0] / viewport[1];
+    return Matrix::perspective(fov, aspect, near, far);
 }
 
-void Camera::look(const Vec3 &target) {
-    const Vec3 direction = glm::normalize(target - position);
+void Camera::look_at(const Vec3 &target) {
+    const Vec3 direction = (target - position).normalized();
 
     rotation = {
-            glm::degrees(std::asin(direction.y)),
-            glm::degrees(std::atan2(direction.x, -direction.z)),
-            0,
+        degrees(std::asin(direction[1])),
+        degrees(std::atan2(direction[0], -direction[2])),
+        0,
     };
 }

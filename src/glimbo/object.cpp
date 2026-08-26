@@ -1,7 +1,5 @@
 #include "object.h"
 
-#include <glm/gtc/matrix_transform.hpp>
-
 using namespace glimbo;
 
 void Object::add(const std::shared_ptr<Component> &component) {
@@ -24,10 +22,10 @@ void Object::draw(const Camera &camera) const {
 }
 
 Matrix Object::model() const {
-    Matrix model = glm::translate(glm::mat4(1), position);
-    model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0, 0, 1));
-    model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0, 1, 0));
-    model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1, 0, 0));
-    model = glm::scale(model, scale);
-    return model;
+    Matrix t = Matrix::translation(position);
+    Matrix rx = Matrix::rotation(rotation[0], {1, 0, 0});
+    Matrix ry = Matrix::rotation(rotation[1], {1, 0, 0});
+    Matrix rz = Matrix::rotation(rotation[2], {1, 0, 0});
+    Matrix s = Matrix::scale(scale);
+    return t * rz * ry * rx * s;
 }

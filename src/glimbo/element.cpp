@@ -15,8 +15,8 @@ void Element::draw() {
 }
 
 void Panel::draw() {
-    ImGui::SetNextWindowSize({size.x, size.y});
-    ImGui::SetNextWindowPos({position.x, position.y});
+    ImGui::SetNextWindowSize({size[0], size[1]});
+    ImGui::SetNextWindowPos({position[0], position[1]});
     ImGui::Begin(title.c_str(), closeable ? &visible : nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
     Element::draw();
     ImGui::End();
